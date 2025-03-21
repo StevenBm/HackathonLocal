@@ -58,21 +58,21 @@ footer {
   background-color: #9a9;
 }
 .dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #303030;
-  min-width: 160px;
-  border-radius: 5px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;  /* Adds space between buttons */
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    background-color: #303030;
+    min-width: 160px;
+    border-radius: 5px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    padding: 10px;
 }
 .file-input {
-    position: absolute;
-    left: -9999px;
-    opacity: 0;
-    width: 0;
-    height: 0;
-    visibility: hidden;
+    display: none !important;
 }
 .dropdown-content a {
   float: none;
