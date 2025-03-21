@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
@@ -6,12 +8,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <title>Investigate impact of regularisation on inverse solution.</title>
-    <link rel="stylesheet" href="layout.css" />
+    <link rel="stylesheet" href="../niivue_dualview.css" />
   </head>
   <body>
     <noscript>niivue requires JavaScript.</noscript>
     <header>
-	<h3>Addition of multiple MRI Files on top of eachother</h3>
+	<h3>Investigate impact of the regularisation parameter lambda on different inverse solutions</h3>
 	<div class="row">
 		<div class="dropdown">
 			<button class="dropbtn" data-toggle="dropdown">
@@ -61,19 +63,6 @@
 				<a class="viewBtn dropdown" id="_DipoleFit">DipoleFit</a>
 			</div>
 		</div>
-        <div class="dropdown">
-            <button class="dropbtn">
-              Insert Imaging files 
-              <i class="fa fa-caret-down"></i>
-            </button>
-            <div class="dropdown-content">
-              <!-- MRI-T1 file input -->
-		<a class="viewBtn dropdown" id="+MRI-T1">MRI-T1</a>
-      	<a class="viewBtn dropdown" id="+MRI-T2">MRI-T2</a>
-		<a class="viewBtn dropdown" id="+PET">PET</a>
-		<a class="viewBtn dropdown" id="+SPECT">SPECT</a>
-            </div>
-          </div>
 		<div class="dropdown">
 			<button class="dropbtn">
 			  About
@@ -366,21 +355,6 @@
 		  lmbdSlider.oninput()
 		  toggleGroup(event.target.id);
 		}
-        else if (event.target.id.charAt(0) === "+") {
-            // add MRI file
-            if (event.target.id === "+MRI-T1") {
-                volumeList1[0].url = "https://roehrin.github.io/webapps_for_EEG_courses/src/sub-16_ses-preop_desc-brain_T1w.nii.gz";
-                nv1.addVolumeFromUrl(volumeList1[0]);
-            }
-            if (event.target.id === "+MRI-T2") {
-                volumeList1[1].url = "https://roehrin.github.io/webapps_for_EEG_courses/src/sub-16_ses-preop_desc-brain_T2w.nii.gz";
-                nv1.addVolumeFromUrl(volumeList1[1]);
-            }
-            if (event.target.id === "+PET") {
-              
-            }
-            if (event.target.id === "+SPECT") {
-            }
 		else if (event.target.id.charAt(0) === "_") {
 			currMethod = event.target.id.substr(1);
 			if (currMethod == "DipoleFit"){
@@ -411,9 +385,6 @@
 			}
 		}
 	}
-}
-
-    
 	async function loadESI() {
 		const curr_crmap = nv1.volumes[1].colormap;
 		nv1.volumes.pop(); //remove current 4D volume
@@ -653,10 +624,6 @@
 		}
 	  }]
 	};
-        setupFileButton("openBtnT1");
-      setupFileButton("openBtnPET");
-      setupFileButton("openBtnSPECT");
 	var config = {responsive: true};
 	Plotly.newPlot('iedTrace', eegData, layout, config);	
  </script>
-    
