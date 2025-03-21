@@ -185,6 +185,13 @@
 	var perc5Btn = document.getElementById('prec5Btn');
 	var perc1Btn = document.getElementById('prec1Btn');
 	var percThrBtn = document.getElementById('percThrCheck');
+    // Buffers for each file
+    var t1Buffer = null;
+	var t2Buffer = null;
+    var petBuffer = null;
+    var spectBuffer = null;
+    
+
 	var volumeList1 = [
 	{
 		url: "https://roehrin.github.io/webapps_for_EEG_courses/src/sub-16_ses-preop_desc-brain_T1w.nii.gz",
@@ -367,50 +374,17 @@
 		  toggleGroup(event.target.id);
 		}
         else if (event.target.id.charAt(0) === "+") {
-            // add MRI file
-            if (event.target.id === "+MRI-T1") {
+            // add files
 				let input = document.createElement('input');
         		input.style.display = 'none';
         		input.type = 'file'
+				input.accept = ".nii,.nii.gz";
         		document.body.appendChild(input);
         		input.onchange = function (event) {
-				 addVolumeFromFiles(event.target.files)
-        			}
-        		input.click()
-        
-            }
-            if (event.target.id === "+MRI-T2") {
-				let input = document.createElement('input');
-        		input.style.display = 'none';
-        		input.type = 'file'
-        		document.body.appendChild(input);
-        		input.onchange = function (event) {
-				 addVolumeFromFiles(event.target.files)
+					loadFileIntoBuffer(event.target.files,event.target.id)
         			}
         		input.click()
             }
-            if (event.target.id === "+PET") {
-				let input = document.createElement('input');
-        		input.style.display = 'none';
-        		input.type = 'file'
-        		document.body.appendChild(input);
-        		input.onchange = function (event) {
-					addVolumeFromFiles(event.target.files)
-        			}
-        		input.click()
-            }
-            if (event.target.id === "+SPECT") {
-				let input = document.createElement('input');
-        		input.style.display = 'none';
-        		input.type = 'file'
-        		document.body.appendChild(input);
-        		input.onchange = function (event) {
-					addVolumeFromFiles(event.target.files)
-        			}
-        		input.click()
-            }
-			nv1.updateGLVolume();
-        }
 		else if (event.target.id.charAt(0) === "_") {
 			currMethod = event.target.id.substr(1);
 			if (currMethod == "DipoleFit"){
@@ -443,11 +417,27 @@
 	}
 
 
-    async function addVolumeFromFiles(f) {
-          console.log('attempting to open ', f[0].name)
-          console.log('details', f[0])
-          nv1.loadFromFile(f[0])
-      }
+	async function loadFileIntoBuffer(f, bufferName) {
+            console.log('Attempting to load file', f[0].name);
+            switch (bufferName) {
+                case '+MRI-T1':
+                    t1Buffer = await nv1.loadFromFile(f[0]);
+					t1Buffer.setVisibility(true);
+                    break;
+                case '+MRI-T2':
+                    petBuffer = await nv1.loadFromFile(f[0]);
+					t2Buffer.setVisibility(true);
+                    break;
+                case '+PET':
+                    petBuffer = await nv1.loadFromFile(f[0]);
+					petBuffer.setVisibility(true);
+                    break;
+                case '+SPECT':
+                    spectBuffer = await nv1.loadFromFile(f[0]);
+					spectBuffer.setVisibility(true);
+                    break;
+            }
+        }
 	async function loadESI() {
 		const curr_crmap = nv1.volumes[1].colormap;
 		nv1.volumes.pop(); //remove current 4D volume
