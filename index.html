@@ -35,20 +35,15 @@
 </head>
 <body>
     <input type="file" id="fileInput" />
-    <button onclick="alert('Button clicked!')">Click Me</button>
+    <button onclick=getFile()>Click Me</button>
     <div class="output"></div>
 
     <script>
-        document.getElementById('fileInput').addEventListener('change', function(event) {
-            const file = event.target.files[0];
-            if (!file) return;
-
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                document.querySelector('.output').textContent = e.target.result;
-            };
-            reader.readAsText(file); // Reads file as text
-        });
+    async function getFile() {
+        const [fileHandle] = await window.showOpenFilePicker();
+        const file = await fileHandle.getFile();
+    return file;
+}
     </script>
 </body>
 </html>
