@@ -127,3 +127,6 @@ footer {
     display: block; /* Makes labels and inputs take up full width on a new line */
     margin-bottom: 10px; /* Adds space between each item */
 }
+.file-input {
+  display: none;
+}
