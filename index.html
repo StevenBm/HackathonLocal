@@ -369,16 +369,47 @@
         else if (event.target.id.charAt(0) === "+") {
             // add MRI file
             if (event.target.id === "+MRI-T1") {
-                
+				let input = document.createElement('input');
+        		input.style.display = 'none';
+        		input.type = 'file'
+        		document.body.appendChild(input);
+        		input.onchange = function (event) {
+          		addVolumeFromFiles(event.target.files)
+        			}
+        		input.click()
+        
             }
             if (event.target.id === "+MRI-T2") {
-                
+				let input = document.createElement('input');
+        		input.style.display = 'none';
+        		input.type = 'file'
+        		document.body.appendChild(input);
+        		input.onchange = function (event) {
+          		addVolumeFromFiles(event.target.files)
+        			}
+        		input.click()
             }
             if (event.target.id === "+PET") {
-              
+				let input = document.createElement('input');
+        		input.style.display = 'none';
+        		input.type = 'file'
+        		document.body.appendChild(input);
+        		input.onchange = function (event) {
+          		addVolumeFromFiles(event.target.files)
+        			}
+        		input.click()
             }
             if (event.target.id === "+SPECT") {
+				let input = document.createElement('input');
+        		input.style.display = 'none';
+        		input.type = 'file'
+        		document.body.appendChild(input);
+        		input.onchange = function (event) {
+          		addVolumeFromFiles(event.target.files)
+        			}
+        		input.click()
             }
+			nv1.updateGLVolume();
         }
 		else if (event.target.id.charAt(0) === "_") {
 			currMethod = event.target.id.substr(1);
@@ -652,9 +683,6 @@
 		}
 	  }]
 	};
-        setupFileButton("openBtnT1");
-      setupFileButton("openBtnPET");
-      setupFileButton("openBtnSPECT");
 	var config = {responsive: true};
 	Plotly.newPlot('iedTrace', eegData, layout, config);	
  </script>
