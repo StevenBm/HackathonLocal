@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
+    
+  <head>
     <style>
         .dropbtn {
           background-color: #04AA6D;
@@ -36,7 +38,6 @@
         
         .dropdown:hover .dropbtn {background-color: #3e8e41;}
         </style>
-  <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
@@ -50,9 +51,9 @@
       <div class="dropdown">
         <button class="dropbtn">Dropdown</button>
         <div class="dropdown-content">
-            <button id="openBtn">Choose a T1 image or mesh with a dialog</button>
-            <button id="openBtn">Choose a PET image or mesh with a dialog</button>
-            <button id="openBtn">Choose a SPECT image or mesh with a dialog</button>
+            <button id="openBtnT1">Choose a T1 image or mesh with a dialog</button>
+            <button id="openBtnPET">Choose a PET image or mesh with a dialog</button>
+            <button id="openBtnSPECT">Choose a SPECT image or mesh with a dialog</button>
         </div>
       </div>
     </header>
@@ -66,15 +67,18 @@
           console.log('details', f[0])
           nv1.loadFromFile(f[0])
       }
-      openBtn.onclick = function () {
+      document.querySelectorAll("button[id^='openBtn']").forEach(button => {
+        button.onclick = function () {
         let input = document.createElement('input');
         input.style.display = 'none';
-        input.type = 'file'
+        input.type = 'file';
         document.body.appendChild(input);
         input.onchange = function (event) {
-          addVolumeFromFiles(event.target.files)
-        }
-        input.click()
+            addVolumeFromFiles(event.target.files);
+        };
+        input.click();
+    };
+});
       }
       var nv1 = new niivue.Niivue();
       await nv1.attachTo("gl1");
