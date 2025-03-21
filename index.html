@@ -67,18 +67,35 @@
           console.log('details', f[0])
           nv1.loadFromFile(f[0])
       }
-      document.querySelectorAll("button[id^='openBtn']").forEach(button => {
-        button.onclick = function () {
+      openBtnT1.onclick = function () {
         let input = document.createElement('input');
         input.style.display = 'none';
-        input.type = 'file';
+        input.type = 'file'
         document.body.appendChild(input);
         input.onchange = function (event) {
-            addVolumeFromFiles(event.target.files);
-        };
-        input.click();
-    };
-});
+          addVolumeFromFiles(event.target.files)
+        }
+        input.click()
+      }
+      openBtnPET.onclick = function () {
+        let input = document.createElement('input');
+        input.style.display = 'none';
+        input.type = 'file'
+        document.body.appendChild(input);
+        input.onchange = function (event) {
+          addVolumeFromFiles(event.target.files)
+        }
+        input.click()
+      }
+      openBtnSPECT.onclick = function () {
+        let input = document.createElement('input');
+        input.style.display = 'none';
+        input.type = 'file'
+        document.body.appendChild(input);
+        input.onchange = function (event) {
+          addVolumeFromFiles(event.target.files)
+        }
+        input.click()
       }
       var nv1 = new niivue.Niivue();
       await nv1.attachTo("gl1");
