@@ -145,3 +145,11 @@ footer {
     background: #04AA6D; /* Green background */
     cursor: pointer; /* Cursor on hover */
   }
+  label {
+    display: block;
+    margin: 8px 0;
+}
+
+input[type="range"] {
+    width: 100%;
+}
