@@ -174,6 +174,7 @@
 	var minSlider = document.getElementById("MinSlider");
 	var maxSlider = document.getElementById("MaxSlider");
 	var timeSlider = document.getElementById("timeSlider");
+	var immethod ="";
 	const lmbdCount = 5;
 	const lmbdValues = [0.00001, 0.001, 0.01, 0.05, 0.1];
 	const timePoints = [0.2, 0.452, 0.48, 0.508, 0.7];
@@ -379,9 +380,10 @@
         		input.style.display = 'none';
         		input.type = 'file'
 				input.accept = ".nii,.nii.gz";
+				immethod = event.target.id;
         		document.body.appendChild(input);
         		input.onchange = function (event) {
-					loadFileIntoBuffer(event.target.files,event.target.id)
+					loadFileIntoBuffer(event.target.files,immethod)
         			}
         		input.click()
             }
