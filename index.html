@@ -1,50 +1,45 @@
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Button Page</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f0f0f0;
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Drag and Drop</title>
+    <link rel="stylesheet" href="light.css" />
+  </head>
+  <body>
+    <noscript>niivue requires JavaScript.</noscript>
+    <header>
+      Drag and drop a file from your local computer. Or drag and drop a
+      <a href="../images/mni152.nii.gz">link to a NIfTI image</a> or a
+      <a href="../images/CIT168.mz3">mesh</a>
+      or
+      <button id="openBtn">Choose an image or mesh with a dialog</button>
+    </header>
+    <main>
+      <canvas id="gl1"></canvas>
+    </main>
+    <script type="module" async>
+      import * as niivue from "https://cdn.jsdelivr.net/npm/@niivue/niivue@0.46.0/dist/index.js";
+      async function addVolumeFromFiles(f) {
+          console.log('attempting to open ', f[0].name)
+          console.log('details', f[0])
+          nv1.loadFromFile(f[0])
+      }
+      openBtn.onclick = function () {
+        let input = document.createElement('input');
+        input.style.display = 'none';
+        input.type = 'file'
+        document.body.appendChild(input);
+        input.onchange = function (event) {
+          addVolumeFromFiles(event.target.files)
         }
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            input {
-            margin-bottom: 10px;
-        }
-        input {
-            margin-bottom: 10px;
-        }
-        .output {
-            margin-top: 10px;
-            padding: 10px;
-            background: white;
-            border: 1px solid #ccc;
-            width: 300px;
-            height: 150px;
-            overflow: auto;
-        }
-    </style>
-</head>
-<body>
-    <input type="file" id="fileInput" />
-    <button onclick=getFile()>Click Me</button>
-    <div class="output"></div>
-
-    <script>
-    async function getFile() {
-        const [fileHandle] = await window.showOpenFilePicker();
-        const file = await fileHandle.getFile();
-    return file;
-}
+        input.click()
+      }
+      var nv1 = new niivue.Niivue();
+      await nv1.attachTo("gl1");
+      nv1.setSliceType(nv1.sliceTypeRender);
     </script>
-</body>
+  </body>
 </html>
-
