@@ -48,8 +48,8 @@ footer {
 }
 
 .dropdown {
-    display: inline-block; /* FIX: Prevents float issue */
-    overflow: hidden;
+    position: relative; /* Ensure dropdown is positioned properly */
+    display: inline-block; /* Prevent full-width issue */
 }
 
 .dropdown .dropbtn {
@@ -60,7 +60,7 @@ footer {
     padding: 12px 12px;
     background-color: #202020;
     font-family: inherit;
-    margin: 0;
+    cursor: pointer;
 }
 
 .dropdown:hover .dropbtn {
@@ -68,7 +68,7 @@ footer {
 }
 
 .dropdown-content {
-    display: none;
+    display: none; /* Ensure dropdown is hidden by default */
     position: absolute;
     background-color: #303030;
     min-width: 160px;
@@ -76,30 +76,14 @@ footer {
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
     padding: 10px;
-    display: flex;
-    flex-direction: column; /* FIX: Ensures stacked layout */
+    flex-direction: column; /* Stack items vertically */
     gap: 10px;
 }
 
-.dropdown-content label {
-    display: block; /* FIX: Labels for file input now properly stacked */
-    padding: 10px 16px;
-    background-color: #4CAF50;
-    color: white;
-    border-radius: 4px;
-    cursor: pointer;
-    text-align: center;
-    text-decoration: none;
-    font-size: 14px;
+/* Make dropdown appear on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
 }
 
-.dropdown-content label:hover {
-    background-color: #45a049;
-}
-
-/* FIX: Remove unnecessary .dropdown-content a styles */
-.dropdown-content a {
-    display: none; /* No anchor elements needed inside dropdown-content */
-}
-
-/* FIX
+/* Style <a> elements (if used) */
+.dropdown-content 
