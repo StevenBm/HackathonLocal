@@ -255,6 +255,35 @@
 			maxSlider.oninput();
 		}
 	}
+	MRIT1Btn.onclick = function () {
+		if (MRIT1Btn.checked){
+			nv1.volumes[0].visible = true;
+		} else {
+			nv1.volumes[0].visible = false;
+		}
+	}
+	MRIT2Btn.onclick = function () {
+		if (MRIT2Btn.checked){
+			nv1.volumes[1].visible = true;
+		} else {
+			nv1.volumes[1].visible = false;
+		}
+	}
+	
+	PETBtn.onclick = function () {
+		if (PETBtn.checked){
+			nv1.volumes[2].visible = true;
+		} else {
+			nv1.volumes[2].visible = false;
+		}
+	}
+	SPECTBtn.onclick = function () {
+		if (SPECTBtn.checked){
+			nv1.volumes[3].visible = true;
+		} else {
+			nv1.volumes[3].visible = false;
+		}
+	}
 	function disablingSliders(disableFlag) {
 		if (disableFlag){
 			// when checked disable min/max sliders  and enable percentage thresholding radio buttons
