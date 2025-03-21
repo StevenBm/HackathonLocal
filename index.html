@@ -22,15 +22,23 @@
         </div>
       </div>
       <div class="dropdown">
-        <button class="dropdown-btn">Visualisation options</button>
+        <button class="dropbtn">Visualisation options</button>
         <div class="dropdown-content">
             <label>
-                <input type="checkbox" id="checkBox"> Enable Option
+                <input type="checkbox" id="checkBox"> Enable MRI
             </label>
-            <label>Slider 1: <span id="slider1Value">50</span></label>
-            <input type="range" id="slider1" min="0" max="1" value="0.50">
-            <label>Slider 2: <span id="slider2Value">30</span></label>
-            <input type="range" id="slider2" min="0" max="1" value="0.30">
+            <label>
+                <input type="checkbox" id="checkBox"> Enable PET
+            </label>
+            <label>
+                <input type="checkbox" id="checkBox"> Enable SPECT
+            </label>
+            <label>MRI opacity: <span id="slider1Value">0.5</span></label>
+            <input type="range" id="slider1" min="0" max="1" value="0.50" step="0.01">
+            <label>Pet Opacity: <span id="slider2Value">0.5</span></label>
+            <input type="range" id="slider2" min="0" max="1" value="0.30"step="0.01">
+            <label>Spect Opacity: <span id="slider3Value">0.5</span></label>
+            <input type="range" id="slider2" min="0" max="1" value="0.30"step="0.01">
         </div>
     </div>
     </header>
