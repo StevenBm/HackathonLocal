@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     
-  <head>
+<head>
     <style>
         .dropbtn {
           background-color: #04AA6D;
@@ -22,29 +22,36 @@
           background-color: #f1f1f1;
           min-width: 160px;
           box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-          z-index: 1;
+          z-index: 1000; /* Ensure dropdown appears on top */
         }
         
-        .dropdown-content a {
+        .dropdown-content button {
           color: black;
           padding: 12px 16px;
           text-decoration: none;
           display: block;
+          width: 100%;
+          border: none;
+          background: none;
+          text-align: left;
+          cursor: pointer;
         }
         
-        .dropdown-content a:hover {background-color: #ddd;}
+        .dropdown-content button:hover {background-color: #ddd;}
         
         .dropdown:hover .dropdown-content {display: block;}
         
         .dropdown:hover .dropbtn {background-color: #3e8e41;}
-        </style>
+    </style>
+    
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <title>Drag and Drop</title>
     <link rel="stylesheet" href="light.css" />
-  </head>
-  <body>
+</head>
+
+<body>
     <noscript>niivue requires JavaScript.</noscript>
     <header>
       <div class="dropdown">
@@ -56,49 +63,45 @@
         </div>
       </div>
     </header>
+
     <main>
       <canvas id="gl1"></canvas>
     </main>
-    <script type="module" async>
+
+    <script type="module">
       import * as niivue from "https://cdn.jsdelivr.net/npm/@niivue/niivue@0.46.0/dist/index.js";
-      async function addVolumeFromFiles(f) {
-          console.log('Attempting to open ', f[0].name)
-          console.log('details', f[0])
-          nv1.loadFromFile(f[0])
-      }
-      openBtnT1.onclick = function () {
-        let input = document.createElement('input');
-        input.style.display = 'none';
-        input.type = 'file'
-        document.body.appendChild(input);
-        input.onchange = function (event) {
-          addVolumeFromFiles(event.target.files)
-        }
-        input.click()
-      }
-      openBtnPET.onclick = function () {
-        let input = document.createElement('input');
-        input.style.display = 'none';
-        input.type = 'file'
-        document.body.appendChild(input);
-        input.onchange = function (event) {
-          addVolumeFromFiles(event.target.files)
-        }
-        input.click()
-      }
-      openBtnSPECT.onclick = function () {
-        let input = document.createElement('input');
-        input.style.display = 'none';
-        input.type = 'file'
-        document.body.appendChild(input);
-        input.onchange = function (event) {
-          addVolumeFromFiles(event.target.files)
-        }
-        input.click()
-      }
+
       var nv1 = new niivue.Niivue();
-      await nv1.attachTo("gl1");
-      nv1.setSliceType(nv1.sliceTypeRender);
+
+      async function initializeNiiVue() {
+          await nv1.attachTo("gl1");
+          nv1.setSliceType(nv1.sliceTypeRender);
+      }
+
+      async function addVolumeFromFiles(f) {
+          console.log('Attempting to open ', f[0].name);
+          console.log('details', f[0]);
+          nv1.loadFromFile(f[0]);
+      }
+
+      function setupFileButton(buttonId) {
+          document.getElementById(buttonId).onclick = function () {
+              let input = document.createElement('input');
+              input.style.display = 'none';
+              input.type = 'file';
+              document.body.appendChild(input);
+              input.onchange = function (event) {
+                  addVolumeFromFiles(event.target.files);
+              };
+              input.click();
+          };
+      }
+
+      setupFileButton("openBtnT1");
+      setupFileButton("openBtnPET");
+      setupFileButton("openBtnSPECT");
+
+      initializeNiiVue();
     </script>
-  </body>
+</body>
 </html>
