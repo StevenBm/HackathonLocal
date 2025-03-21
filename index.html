@@ -443,7 +443,11 @@
 	}
 
 
-    
+    async function addVolumeFromFiles(f) {
+          console.log('attempting to open ', f[0].name)
+          console.log('details', f[0])
+          nv1.loadFromFile(f[0])
+      }
 	async function loadESI() {
 		const curr_crmap = nv1.volumes[1].colormap;
 		nv1.volumes.pop(); //remove current 4D volume
