@@ -16,11 +16,40 @@
             padding: 10px 20px;
             font-size: 16px;
             cursor: pointer;
+            input {
+            margin-bottom: 10px;
+        }
+        input {
+            margin-bottom: 10px;
+        }
+        .output {
+            margin-top: 10px;
+            padding: 10px;
+            background: white;
+            border: 1px solid #ccc;
+            width: 300px;
+            height: 150px;
+            overflow: auto;
         }
     </style>
 </head>
 <body>
-    <button onclick="alert('Button clicked!')">Click Me test</button>
+    <input type="file" id="fileInput" />
+    <button onclick="alert('Button clicked!')">Click Me</button>
+    <div class="output"></div>
+
+    <script>
+        document.getElementById('fileInput').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.querySelector('.output').textContent = e.target.result;
+            };
+            reader.readAsText(file); // Reads file as text
+        });
+    </script>
 </body>
 </html>
 
