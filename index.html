@@ -185,22 +185,22 @@
 	var perc5Btn = document.getElementById('prec5Btn');
 	var perc1Btn = document.getElementById('prec1Btn');
 	var percThrBtn = document.getElementById('percThrCheck');
-	var volumeList1 = [
-	{
-		url: "https://roehrin.github.io/webapps_for_EEG_courses/src/sub-16_ses-preop_desc-brain_T1w.nii.gz",
-		colormap: "gray",
-		opacity: 1
-	},
-	{
-		url: "https://roehrin.github.io/webapps_for_EEG_courses/IED_source/sub-16_meth-" + currMethod.toLowerCase() + ".nii",
-		colormap: "hot",
-		opacity: .6,
-		visible: true,
-		frame4D: 0,
-		cal_min: 0,
-		cal_max: 1000,
-	},
-	]
+	//var volumeList1 = [
+	//{
+	//	url: "https://roehrin.github.io/webapps_for_EEG_courses/src/sub-16_ses-preop_desc-brain_T1w.nii.gz",
+	//	colormap: "gray",
+	//	opacity: 1
+	//},
+	//{
+	//	url: "https://roehrin.github.io/webapps_for_EEG_courses/IED_source/sub-16_meth-" + currMethod.toLowerCase() + ".nii",
+	//	colormap: "hot",
+	//	opacity: .6,
+	//	visible: true,
+	//	frame4D: 0,
+	//	cal_min: 0,
+	//	cal_max: 1000,
+	//},
+	//]
 	perc20Btn.onclick = function (){
 		currentPerc = Math.round(0.20*volSize);
 		applyPercThreshold();
@@ -366,7 +366,21 @@
 		  lmbdSlider.oninput()
 		  toggleGroup(event.target.id);
 		}
-     
+        else if (event.target.id.charAt(0) === "+") {
+            // add MRI file
+            if (event.target.id === "+MRI-T1") {
+                volumeList1[0].url = "https://roehrin.github.io/webapps_for_EEG_courses/src/sub-16_ses-preop_desc-brain_T1w.nii.gz";
+                nv1.addVolumeFromUrl(volumeList1[0]);
+            }
+            if (event.target.id === "+MRI-T2") {
+                volumeList1[1].url = "https://roehrin.github.io/webapps_for_EEG_courses/src/sub-16_ses-preop_desc-brain_T2w.nii.gz";
+                nv1.addVolumeFromUrl(volumeList1[0]);
+            }
+            if (event.target.id === "+PET") {
+              
+            }
+            if (event.target.id === "+SPECT") {
+            }
 		else if (event.target.id.charAt(0) === "_") {
 			currMethod = event.target.id.substr(1);
 			if (currMethod == "DipoleFit"){
@@ -397,6 +411,9 @@
 			}
 		}
 	}
+    
+
+    
 	async function loadESI() {
 		const curr_crmap = nv1.volumes[1].colormap;
 		nv1.volumes.pop(); //remove current 4D volume
