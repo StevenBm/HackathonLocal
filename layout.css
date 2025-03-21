@@ -40,10 +40,12 @@ footer {
 	align-items: stretch;
 	background: #404040;
 }
-.dropdown {
-  float: left;
-  overflow: hidden;
-}
+
+    .dropdown {
+        display: block;
+        margin: 10px 0;
+      }
+
 .dropdown .dropbtn {
   font-size: 16px;
   border: none;

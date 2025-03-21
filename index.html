@@ -6,6 +6,13 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
   <title>Drag and Drop</title>
   <link rel="stylesheet" href="layout.css" />
+  <style>
+    /* Stack the dropdowns vertically */
+    .dropdown {
+      display: block;
+      margin: 10px 0;
+    }
+  </style>
 </head>
 
 <body>
@@ -76,6 +83,15 @@
         petBuffer = volume;
       } else if (modality === 'SPECT') {
         spectBuffer = volume;
+      }
+
+      // Automatically add the modality to the visualization if enabled
+      if (modality === 'T1' && document.getElementById('checkBoxMRI').checked) {
+        nv1.addBuffer(t1Buffer);
+      } else if (modality === 'PET' && document.getElementById('checkBoxPET').checked) {
+        nv1.addBuffer(petBuffer);
+      } else if (modality === 'SPECT' && document.getElementById('checkBoxSPECT').checked) {
+        nv1.addBuffer(spectBuffer);
       }
     }
 
