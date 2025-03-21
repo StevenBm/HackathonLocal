@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Drag and Drop</title>
+    <link rel="stylesheet" href="layout.css" />
+</head>
+
+<body>
+    <noscript>niivue requires JavaScript.</noscript>
+    <header>
+      <div class="dropdown">
+        <button class="dropbtn">Input files</button>
+        <div class="dropdown-content">
+            <button id="openBtnT1">Choose a T1 image</button>
+            <button id="openBtnPET">Choose a PET image</button>
+            <button id="openBtnSPECT">Choose a SPECT image</button>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn">Visualisation opts</button>
+        <div class="dropdown-content">
+            <label>
+                <input type="checkbox" id="checkBoxMRI"> Enable MRI
+            </label>
+            <label>
+                <input type="checkbox" id="checkBoxPET"> Enable PET
+            </label>
+            <label>
+                <input type="checkbox" id="checkBoxSPECT"> Enable SPECT
+            </label>
+            
+            <label>MRI opacity: <span id="slider1Value">0.5</span></label>
+            <input type="range" id="slider1" min="0" max="1" value="0.50" step="0.01">
+            
+            <label>Pet Opacity: <span id="slider2Value">0.5</span></label>
+            <input type="range" id="slider2" min="0" max="1" value="0.50" step="0.01">
+            
+            <label>Spect Opacity: <span id="slider3Value">0.5</span></label>
+            <input type="range" id="slider3" min="0" max="1" value="0.50" step="0.01">
+        </div>
+    </div>
+    </div>
+    </header>
+
+    <main>
+      <canvas id="gl1" width="600" height="600"></canvas>
+    </main>
+
+    <script type="module">
+      import * as niivue from "https://cdn.jsdelivr.net/npm/@niivue/niivue@0.46.0/dist/index.js";
+
+      var nv1 = new niivue.Niivue();
+
+      async function initializeNiiVue() {
+          await nv1.attachTo("gl1");
+          nv1.setSliceType(nv1.sliceTypeRender);
+      }
+
+      async function addVolumeFromFiles(f) {
+          console.log('Attempting to open ', f[0].name);
+          console.log('details', f[0]);
+          nv1.loadFromFile(f[0]);
+      }
+
+      function setupFileButton(buttonId) {
+          document.getElementById(buttonId).onclick = function () {
+              let input = document.createElement('input');
+              input.style.display = 'none';
+              input.type = 'file';
+              document.body.appendChild(input);
+              input.onchange = function (event) {
+                  addVolumeFromFiles(event.target.files);
+              };
+              input.click();
+          };
+      }
+      document.getElementById('slider1').addEventListener('input', function () {
+         document.getElementById('slider1Value').textContent = this.value;
+        });
+      document.getElementById('slider2').addEventListener('input', function () {
+        document.getElementById('slider2Value').textContent = this.value;
+       });
+        document.getElementById('slider3').addEventListener('input', function () {
+    document.getElementById('slider3Value').textContent = this.value;
+});
+      setupFileButton("openBtnT1");
+      setupFileButton("openBtnPET");
+      setupFileButton("openBtnSPECT");
+
+      initializeNiiVue();
+    </script>
+</body>
+</html>
