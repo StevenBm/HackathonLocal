@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <title>Investigate addition of Image modalities with opacity</title>
+    <title>Investigate addition of Image modalities</title>
     <link rel="stylesheet" href="layout.css" />
   </head>
   <body>
@@ -208,22 +208,22 @@
     var spectBuffer = null;
     
 
-	//var volumeList1 = [
-	//{
-	//	url: "https://roehrin.github.io/webapps_for_EEG_courses/src/sub-16_ses-preop_desc-brain_T1w.nii.gz",
-	//	colormap: "gray",
-	//	opacity: 1
-	//},
-	//{
-	//	url: "https://roehrin.github.io/webapps_for_EEG_courses/IED_source/sub-16_meth-" + currMethod.toLowerCase() + ".nii",
-	//	colormap: "hot",
-	//	opacity: .6,
-	//	visible: true,
-	//	frame4D: 0,
-	//	cal_min: 0,
-	//	cal_max: 1000,
-	//},
-	//]
+	var volumeList1 = [
+	{
+		url: "https://roehrin.github.io/webapps_for_EEG_courses/src/sub-16_ses-preop_desc-brain_T1w.nii.gz",
+		colormap: "gray",
+		opacity: 1
+	},
+	{
+		url: "https://roehrin.github.io/webapps_for_EEG_courses/IED_source/sub-16_meth-" + currMethod.toLowerCase() + ".nii",
+		colormap: "hot",
+		opacity: .6,
+		visible: true,
+		frame4D: 0,
+		cal_min: 0,
+		cal_max: 1000,
+	},
+	]
 	perc20Btn.onclick = function (){
 		currentPerc = Math.round(0.20*volSize);
 		applyPercThreshold();
@@ -526,8 +526,8 @@
 	}
 	var nv1 = new niivue.Niivue(opts)
 	nv1.attachTo("gl1")
-	//await nv1.loadVolumes(volumeList1)
-	//nv1.volumes[0].colorbarVisible = false;
+	await nv1.loadVolumes(volumeList1)
+	nv1.volumes[0].colorbarVisible = false;
 	// preload the dipoles of the dipole fit
 	const R = 15;
 	let response = await fetch("https://roehrin.github.io/webapps_for_EEG_courses/IED_source/sub-16_meth-dipole_fit.json", {});
