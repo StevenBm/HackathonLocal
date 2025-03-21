@@ -146,13 +146,13 @@
 			/>
 			<label id="lmbdString" style="padding-right: 10px;">0</label>
 			<label style="border-left: 2px solid grey; padding-left: 2px">
-				<input type="checkbox"  id="MRI T1" />
+				<input type="checkbox"  id="MRIT1check" />
 				<label for="MRIT1check"> MRI T1</label>
-				<input type="checkbox"  id="MRI T2" />
+				<input type="checkbox"  id="MRIT2check" />
 				<label for="MRIT2check"> MRI T2 </label>
-				<input type="checkbox"  id="PET" />
+				<input type="checkbox"  id="PETcheck" />
 				<label for="PETcheck">PET</label>
-				<input type="checkbox"  id="SPECT" />
+				<input type="checkbox"  id="SPECTcheck" />
 				<label for="SPECTcheck">SPECT</label>
 		</div>
 	</div>
@@ -195,6 +195,12 @@
 	var perc5Btn = document.getElementById('prec5Btn');
 	var perc1Btn = document.getElementById('prec1Btn');
 	var percThrBtn = document.getElementById('percThrCheck');
+
+	//Checkboxes
+	var MRIT1Btn = document.getElementById('MRIT1check');
+	var MRIT2Btn = document.getElementById('MRIT2check');
+	var PETBtn = document.getElementById('PETcheck');
+	var SPECTBtn = document.getElementById('SPECTcheck');
     // Buffers for each file
     var t1Buffer = null;
 	var t2Buffer = null;
@@ -434,18 +440,22 @@
                 case '+MRI-T1':
                     t1Buffer = await nv1.loadFromFile(f[0]);
 					nv1.volumes[0] = t1Buffer
+					MRIT1Btn.checked = true;
                     break;
                 case '+MRI-T2':
                     petBuffer = await nv1.loadFromFile(f[0]);
 					nv1.volumes[1] = t2Buffer
+					MRIT2Btn.checked = true;
                     break;
                 case '+PET':
                     petBuffer = await nv1.loadFromFile(f[0]);
 					nv1.volumes[2] = petBuffer
+					PETBtn.checked = true;
                     break;
                 case '+SPECT':
                     spectBuffer = await nv1.loadFromFile(f[0]);
 					nv1.volumes[3] = spectBuffer
+					SPECTBtn.checked = true;
                     break;
             }
         }
