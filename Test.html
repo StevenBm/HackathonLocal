@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Niivue MRI Overlay</title>
+    <script src="https://unpkg.com/niivue"></script>
+    <style>
+        body { text-align: center; }
+        #controls { margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <h2>MRI Image Overlay with Niivue</h2>
+    <canvas id="glcanvas"></canvas>
+    <div id="controls">
+        <label>Image 1 Opacity: <input type="range" id="opacity1" min="0" max="1" step="0.1" value="1"></label>
+        <label>Image 2 Opacity: <input type="range" id="opacity2" min="0" max="1" step="0.1" value="0.7"></label>
+        <label>Image 3 Opacity: <input type="range" id="opacity3" min="0" max="1" step="0.1" value="0.5"></label>
+    </div>
+    
+    <script>
+        let nv = new Niivue.Niivue();
+        nv.attachTo("glcanvas");
+
+        let images = [
+            { url: "mri1.nii.gz", opacity: 1 },
+            { url: "mri2.nii.gz", opacity: 0.7 },
+            { url: "mri3.nii.gz", opacity: 0.5 }
+        ];
+
+        nv.loadVolumes(images);
+
+        document.getElementById("opacity1").addEventListener("input", (e) => {
+            nv.setOpacity(0, parseFloat(e.target.value));
+        });
+        document.getElementById("opacity2").addEventListener("input", (e) => {
+            nv.setOpacity(1, parseFloat(e.target.value));
+        });
+        document.getElementById("opacity3").addEventListener("input", (e) => {
+            nv.setOpacity(2, parseFloat(e.target.value));
+        });
+    </script>
+</body>
+</html>
