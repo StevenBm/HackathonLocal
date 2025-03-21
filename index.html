@@ -68,9 +68,10 @@
             </button>
             <div class="dropdown-content">
               <!-- MRI-T1 file input -->
-        <button id="openBtn">Open MRI-T1</button>
-        <button id="openBtn">Open MRI-T2</button>
-
+		<a class="viewBtn dropdown" id="+MRI-T1">MRI-T1</a>
+      	<a class="viewBtn dropdown" id="+MRI-T2">MRI-T2</a>
+		<a class="viewBtn dropdown" id="+PET">PET</a>
+		<a class="viewBtn dropdown" id="+SPECT">SPECT</a>
             </div>
           </div>
 		<div class="dropdown">
@@ -184,22 +185,22 @@
 	var perc5Btn = document.getElementById('prec5Btn');
 	var perc1Btn = document.getElementById('prec1Btn');
 	var percThrBtn = document.getElementById('percThrCheck');
-	//var volumeList1 = [
-	//{
-	//	url: "https://roehrin.github.io/webapps_for_EEG_courses/src/sub-16_ses-preop_desc-brain_T1w.nii.gz",
-	//	colormap: "gray",
-	//	opacity: 1
-	//},
-	//{
-	//	url: "https://roehrin.github.io/webapps_for_EEG_courses/IED_source/sub-16_meth-" + currMethod.toLowerCase() + ".nii",
-	//	colormap: "hot",
-	//	opacity: .6,
-	//	visible: true,
-	//	frame4D: 0,
-	//	cal_min: 0,
-	//	cal_max: 1000,
-	//},
-	//]
+	var volumeList1 = [
+	{
+		url: "https://roehrin.github.io/webapps_for_EEG_courses/src/sub-16_ses-preop_desc-brain_T1w.nii.gz",
+		colormap: "gray",
+		opacity: 1
+	},
+	{
+		url: "https://roehrin.github.io/webapps_for_EEG_courses/IED_source/sub-16_meth-" + currMethod.toLowerCase() + ".nii",
+		colormap: "hot",
+		opacity: .6,
+		visible: true,
+		frame4D: 0,
+		cal_min: 0,
+		cal_max: 1000,
+	},
+	]
 	perc20Btn.onclick = function (){
 		currentPerc = Math.round(0.20*volSize);
 		applyPercThreshold();
