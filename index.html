@@ -422,19 +422,19 @@
             switch (bufferName) {
                 case '+MRI-T1':
                     t1Buffer = await nv1.loadFromFile(f[0]);
-					t1Buffer.setVisibility(true);
+					nv1.volumes[0] = t1Buffer
                     break;
                 case '+MRI-T2':
                     petBuffer = await nv1.loadFromFile(f[0]);
-					t2Buffer.setVisibility(true);
+					nv1.volumes[1] = t2Buffer
                     break;
                 case '+PET':
                     petBuffer = await nv1.loadFromFile(f[0]);
-					petBuffer.setVisibility(true);
+					nv1.volumes[2] = petBuffer
                     break;
                 case '+SPECT':
                     spectBuffer = await nv1.loadFromFile(f[0]);
-					spectBuffer.setVisibility(true);
+					nv1.volumes[3] = spectBuffer
                     break;
             }
         }
